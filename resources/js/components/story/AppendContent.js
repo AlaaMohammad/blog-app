@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import api from "../../services/api";
 
-class CreateTransaction extends Component{
+class AppendContent extends Component{
     handleSubmit (e) {
 
         const { content} = e.target
@@ -48,4 +48,4 @@ class CreateTransaction extends Component{
     }
 }
 
-export default CreateTransaction;
+export default AppendContent;
