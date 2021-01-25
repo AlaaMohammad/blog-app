@@ -1,18 +1,28 @@
 import React , {Component} from 'react';
 import api from "../../services/api";
 
-class CreateTransaction extends Component{
+class EditStory extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+            content: '',
+        }
+        this.onChange = this.onChange.bind(this);
+        this.handleRegister= this.handleSubmit.bind(this);
+    }
+
+    onChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
     handleSubmit (e) {
 
-        const { content} = e.target
-
-        const data = {
-            title: title.value,
-            content: content.value,
-        }
+        const {title,content} = this.state;
 
         const storyId = 1;
-        api.post('/edit-story-content/'+storyId, data)
+        api.post('/edit-story-content/'+storyId, {title,content})
             .then(response => {
                 history.push('/dashboard')
             })
@@ -38,7 +48,7 @@ class CreateTransaction extends Component{
                         <div className="form-group row">
                             <label htmlFor="category" className="col-md-4 col-form-label text-md-right">Content</label>
                             <div className="col-md-6">
-                                <teaxtarea id="category" type="text" className="form-control"
+                                <teaxtarea id="category"  className="form-control"
                                            name="content" required   onChange={this.onChange }/>
                             </div>
                         </div>
@@ -56,4 +66,4 @@ class CreateTransaction extends Component{
     }
 }
 
-export default CreateTransaction;
+export default EditStory;
