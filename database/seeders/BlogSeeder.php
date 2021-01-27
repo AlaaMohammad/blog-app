@@ -35,7 +35,7 @@ class BlogSeeder extends Seeder
             'img_src' => 'design-blog.jpg'
         ],[
             'title' => 'Style',
-            'img_src' => 'style-blog.jpeg'
+            'img_src' => 'style-blog.jpg'
         ]]);
     }
 }

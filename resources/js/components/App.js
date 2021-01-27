@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import { Route, Switch, withRouter } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import api from '../services/api';
+import UserDashboard from './dashboard/UserDashboard'
 import ListBlogs from "./blog/ListBlogs";
 import ViewBlog from "./blog/ViewBlog";
-
+import ViewStory from "./story/ViewStory";
+import PrivateRoute from "./route/PrivateRoute";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import Header from "./layout/Header";
+import CreateStory from "./story/CreateStory";
 
 
 class App extends Component {
@@ -15,8 +20,8 @@ class App extends Component {
             blogs: {},
         };
 
-       // this.handleLogin = this.handleLogin.bind(this);
-        //this.handleLogout = this.handleLogout.bind(this);
+        /* this.handleLogin = this.handleLogin.bind(this);
+         this.handleLogout = this.handleLogout.bind(this);*/
     }
 
     /*checkLoginStatus() {
@@ -81,24 +86,73 @@ class App extends Component {
     }*/
 
     render() {
+/*
+        const { location: { pathname } } = this.props;
+*/
+
         return (
             <div className="app">
-                <ViewBlog/>
-{/*
+                <Header
+
+                />
                 <Switch>
                     <Route
                         exact
-                        path={"/"}
+                        path={"/login"}
                         render={props => (
-                            <Home
+                            <Login
                                 {...props}
-                                handleLogin={this.handleLogin}
-                                handleLogout={this.handleLogout}
-                                loggedInStatus={this.state.loggedInStatus}
+                            />
+                        )}
+                    />
+                                <Route
+                        exact
+                        path={"/register"}
+                        render={props => (
+                            <Register
+                                {...props}
                             />
                         )}
                     />
                     <Route
+                        exact
+                        path={"/"}
+                        render={props => (
+                            <ListBlogs
+                                {...props}
+                            />
+                        )}
+                    />
+
+                    <Route
+                        exact
+                        path={"/blog/:id"}
+                        render={props => (
+                            <ViewBlog
+                                {...props}
+                            />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/story/:id"
+                        component={ViewStory}
+                    />
+                    <Route
+                        exact
+                        path={"/create-story"}
+                        render={props => (
+                            <CreateStory
+                                {...props}
+                                loggedInStatus={this.state.loggedInStatus}
+                            />
+                        )}
+                    />
+                    <PrivateRoute exact path="/dashboard" component={UserDashboard}/>
+
+                    <Route path="*" component={() => "404 Not Found "}/>
+                    }
+                    {/* <Route
                         exact
                         path={"/dashboard"}
                         render={props => (
@@ -108,38 +162,19 @@ class App extends Component {
                             />
                         )}
                     />
-                    <Route
-                        exact
-                        path={"/summary"}
-                        render={props => (
-                            <Summary
-                                {...props}
-                                loggedInStatus={this.state.loggedInStatus}
-                            />
-                        )}
-                    />
-                    <Route
-                        exact
-                        path={"/create-transaction"}
-                        render={props => (
-                            <CreateTransaction
-                                {...props}
-                                loggedInStatus={this.state.loggedInStatus}
-                            />
-                        )}
-                    />
+
                     <Route
                         exact
                         path={"/create-category"}
                         render={props => (
-                            <CreateCategory
+                            <CreateStory
                                 {...props}
                                 loggedInStatus={this.state.loggedInStatus}
                             />
                         )}
                     />
+                   */}
                 </Switch>
-*/}
             </div>
         );
     }

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 class ViewBlog extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class ViewBlog extends Component {
     }
 
     componentDidMount() {
-        const blogId = 1;
+        const blogId =this.props.match.params.id;
         axios.get('/api/view-blog-content/'+blogId).then(response => {
             this.setState({
                 stories: response.data.stories
@@ -26,22 +27,23 @@ class ViewBlog extends Component {
             <div className="container">
                 <h1>list Blogs</h1>
                 <div className="row">
-                    <table className="table table-hovered table-striped">
-                        <thead>
-                        <tr>
-                            <td>Blog</td>
-
-                        </tr>
-                        </thead>
                         {stories.map((story) => (
-                            <tbody>
-                            <tr>
-                                <td> {story.title}</td>
-                                <td> {story.content}</td>
-                            </tr>
-                            </tbody>
+                            <article
+                                className="item is-even is-image post tag-creative tag-product tag-hash-post-card-amber featured">
+                                <div className="item-container">
+                                    <div className="item-content">
+                                        <h2 className="item-title">
+                                             <Link className="global-underline" to={`/story/${story.id}`}>{story.title}</Link>
+                                        </h2>
+                                        <div className="post-content">
+                                        <p className="item-excerpt">
+                                            {story.content}
+                                        </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
                         ))}
-                    </table>
                 </div>
             </div>
         );

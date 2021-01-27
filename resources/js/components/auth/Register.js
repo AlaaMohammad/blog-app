@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import api from "../../services/api";
+import {login} from "../../utils/authentication";
 
 class Register extends Component {
     constructor(props) {
@@ -30,9 +31,8 @@ class Register extends Component {
         })
             .then(response=> {
                 if (response.data.status === "created") {
-                    this.props.handleSuccessfulAuth(response.data);
-                    sessionStorage.setItem('access_token', response.data.access_token);
-                }
+                    login()
+                    this.props.history.push("/dashboard");                }
             })
             .catch(error=> {
                 console.log("registration error", error);
@@ -41,7 +41,13 @@ class Register extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="row">
+                <div className="custom-image global-bg-image login-image" style={{
+                    backgroundImage: "url(" + "https://images.unsplash.com/photo-1535837487710-a191373a20ae?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2000&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ" + ")",
+                }}></div>
+                <div className="custom-container">
+                    <div className="custom-content">
+                        <h1>Get Started</h1>
                 <form onSubmit={this.handleRegister}>
                     <div className="form-group row">
                         <label htmlFor="name" className="col-md-4 col-form-label text-md-right">
@@ -87,6 +93,8 @@ class Register extends Component {
                         </div>
                     </div>
                 </form>
+                    </div>
+                </div>
             </div>
         );
     }

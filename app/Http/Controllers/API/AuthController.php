@@ -21,9 +21,9 @@ class AuthController extends Controller
 
         $user = User::create($validatedData);
 
-        $accessToken = $user->createToken('authToken')->accessToken;
+        //$accessToken = $user->createToken('authToken')->accessToken;
 
-        return response([ 'user' => $user, 'access_token' => $accessToken]);
+        return response([ 'status'=>'created','user' => $user, 'access_token' => '$accessToken',200]);
     }
 
     public function login(Request $request)

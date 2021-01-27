@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 class ListBlogs extends Component {
     constructor(props) {
@@ -23,23 +24,23 @@ class ListBlogs extends Component {
         const {blogs} = this.state;
         return (
             <div className="container">
-                <h1>list Blogs</h1>
-                <div className="row">
-                    <table className="table table-hovered table-striped">
-                        <thead>
-                        <tr>
-                            <td>Blog</td>
-
-                        </tr>
-                        </thead>
-                        {blogs.map((blog) => (
-                            <tbody>
-                            <tr>
-                                <td> {blog.title}</td>
-                            </tr>
-                            </tbody>
+                <div className="row custom-elements-wrap">
+                        {blogs.map((blog,index) => (
+                            index <= 2 ?
+                            <div className="custom-element">
+                            <Link to={`/blog/${blog.id}`}>
+                            <img src={`/img/${blog.img_src}`} alt="story"/>
+                            </Link>
+                            <h2 className="global-underline">{blog.title}</h2>
+                            <span>11 posts</span>
+                            </div>:
+                                <div className="custom-element bottom">
+                                    <Link to={`/blog/${blog.id}`}>
+                                        <img src={`/img/${blog.img_src}`} alt="story"/>
+                                    </Link>
+                                    <h2 className="global-underline">{blog.title}</h2>
+                                </div>
                         ))}
-                    </table>
                 </div>
             </div>
         );

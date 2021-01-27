@@ -9,7 +9,7 @@ class CreateStory extends Component{
             content: '',
         }
         this.onChange = this.onChange.bind(this);
-        this.handleRegister= this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     onChange(e) {
         this.setState({
@@ -18,18 +18,19 @@ class CreateStory extends Component{
     }
 
     handleSubmit (e) {
+        e.preventDefault();
 
         const {title,content} = this.state;
 
-        api.post('/edit-story-content/', {title,content})
+        api.post('/api/create-story/'+'1',{
+content,title
+        })
             .then(response => {
                 history.push('/dashboard')
             })
             .catch(error=> {
                 console.log("create error", error);
             })
-        e.preventDefault();
-
     }
     render() {
         return(
@@ -47,8 +48,9 @@ class CreateStory extends Component{
                         <div className="form-group row">
                             <label htmlFor="category" className="col-md-4 col-form-label text-md-right">Content</label>
                             <div className="col-md-6">
-                                <teaxtarea id="category" type="text" className="form-control"
-                                           name="content" required   onChange={this.onChange }/>
+                                <textarea id="content" type="text" className="form-control"
+                                           name="content" required   onChange={this.onChange } rows={10} cols={30} value={this.state.content} ></textarea>
+
                             </div>
                         </div>
                         <div className="form-group row mb-0">

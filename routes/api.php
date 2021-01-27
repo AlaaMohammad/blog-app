@@ -27,6 +27,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 |--------------------------------------------------------------------------
 |
 */
+    Route::post('/register', [AuthController::class,'register']);
+    Route::post('/login', [AuthController::class,'login']);
 
 Route::post('/register', [AuthController::class,'register']);
 Route::post('/login', [AuthController::class,'login']);
@@ -47,11 +49,9 @@ Route::get('/view-blog-content/{blog_id}',[BlogController::class,'view']);
 |--------------------------------------------------------------------------
 |
 */
-Route::post('/create-story/{blog_id}',[StoryController::class,'create']);
-Route::post('/edit-story-content/{story_id}',[StoryController::class,'edit']);
-Route::post('/append-story-content/{story_id}',[StoryController::class,'append']);
 
-Route::group(['middleware' ,'auth:api'], function () {
-    Route::get('/view-blog',[BlogController::class,'index']);
+    Route::get('/view-story/{story_id}',[StoryController::class,'view']);
+    Route::post('/create-story/{blog_id}',[StoryController::class,'create']);
+    Route::post('/edit-story-content/{story_id}',[StoryController::class,'edit']);
+    Route::post('/append-story-content/{story_id}',[StoryController::class,'append']);
 
-});

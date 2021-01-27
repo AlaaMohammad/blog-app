@@ -3,12 +3,25 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BlogResource;
 use App\Models\Story;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class StoryController extends Controller
 {
+
+    /**
+     * @param $story_id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function view($story_id){
+        $story = Story::findOrFail($story_id);
+        return response(['story' => $story, 'message' => 'retrieved successfully'], 200);
+    }
+
+
+
     /**
      * Create new story, only logged users can add stories
      *
@@ -16,7 +29,7 @@ class StoryController extends Controller
      * @param $blog_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(Request $request,$blog_id)
+    public function create(Request $request)
     {
         $email = 'demo@blog.com';
         $logged_user = User::where('email', $email)->first();
@@ -30,7 +43,7 @@ class StoryController extends Controller
                 'title' => $validatedData['title'],
                 'content' => $validatedData['content'],
                 'user_id' => $logged_user->id,
-                'bolg_id' => $blog_id
+                'blog_id' => '2'
             ]);
             return response()->json(['message' => 'created successfully'], 200);
         } else {
