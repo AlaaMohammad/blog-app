@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BlogController;
 use App\Http\Controllers\API\StoryController;
-use App\Http\Controllers\API\AuthController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -27,11 +27,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 |--------------------------------------------------------------------------
 |
 */
-    Route::post('/register', [AuthController::class,'register']);
-    Route::post('/login', [AuthController::class,'login']);
-
-Route::post('/register', [AuthController::class,'register']);
-Route::post('/login', [AuthController::class,'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 /*
 |--------------------------------------------------------------------------
@@ -39,8 +36,8 @@ Route::post('/login', [AuthController::class,'login']);
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/view-blogs',[BlogController::class,'index']);
-Route::get('/view-blog-content/{blog_id}',[BlogController::class,'view']);
+Route::get('/view-blogs', [BlogController::class, 'index']);
+Route::get('/view-blog-content/{blog_id}', [BlogController::class, 'view']);
 
 
 /*
@@ -50,8 +47,8 @@ Route::get('/view-blog-content/{blog_id}',[BlogController::class,'view']);
 |
 */
 
-    Route::get('/view-story/{story_id}',[StoryController::class,'view']);
-    Route::post('/create-story/{blog_id}',[StoryController::class,'create']);
-    Route::post('/edit-story-content/{story_id}',[StoryController::class,'edit']);
-    Route::post('/append-story-content/{story_id}',[StoryController::class,'append']);
+Route::get('/view-story/{story_id}', [StoryController::class, 'view']);
+Route::post('/create-story/{blog_id}', [StoryController::class, 'create']);
+Route::post('/edit-story-content/{story_id}', [StoryController::class, 'edit']);
+Route::post('/append-story-content/{story_id}', [StoryController::class, 'append']);
 

@@ -23,9 +23,8 @@ class Login extends Component {
     handleLogin(e) {
         e.preventDefault();
         const {email, password} = this.state;
-        api.post('/api/login', {
-            email: email,
-            password: password
+        axios.get('/sanctum/csrf-cookie').then(response => {
+            // Login...
         }).then(response => {
             login()
             this.props.history.push("/dashboard");
